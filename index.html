@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJSQUISHY.FIT | Blue NeeDoh Nice Cube</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+        }
+
+        body {
+            background-color: #39ff14; /* All Lime Green Background */
+            color: #0d0d0d;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .contact-top-bar {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            border-bottom: 4px solid #ff1493;
+            font-family: Arial, sans-serif;
+        }
+
+        .contact-top-bar a { color: #39ff14; text-decoration: none; }
+
+        header {
+            background-color: #ff1493; /* Hot Pink Header */
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 6px solid #0d0d0d;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .logo {
+            font-size: 38px;
+            color: #ffffff;
+            text-decoration: none;
+            text-shadow: 4px 4px 0px #0d0d0d;
+            letter-spacing: 1px;
+        }
+
+        .cart-toggle-btn {
+            background-color: #0d0d0d;
+            color: #39ff14;
+            border: 3px solid #ffffff;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            position: relative;
+            box-shadow: 3px 3px 0px #0d0d0d;
+        }
+
+        .cart-counter-badge {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background-color: #ffffff;
+            color: #ff1493;
+            border: 2px solid #0d0d0d;
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .hero-banner {
+            background-color: #39ff14;
+            padding: 60px 6% 30px 6%;
+            text-align: center;
+        }
+
+        .hero-banner h1 {
+            font-size: 55px;
+            color: #0d0d0d;
+            text-transform: uppercase;
+            text-shadow: 4px 4px 0px #ff1493;
+            margin-bottom: 15px;
+        }
+
+        .shipping-timeline-badge {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #0d0d0d;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 2px solid #ff1493;
+        }
+
+        .showcase-area {
+            background-color: #39ff14;
+            padding: 20px 40px 80px 40px;
+            border-bottom: 6px solid #0d0d0d;
+        }
+
+        .single-product-box {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 6px solid #0d0d0d;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 12px 12px 0px #0d0d0d;
+        }
+
+        .image-frame {
+            background-color: #f3f4f6;
+            border: 3px dashed #ff1493;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .cube-svg {
+            width: 180px;
+            height: 180px;
+            filter: drop-shadow(5px 10px 10px rgba(0,0,0,0.15));
+        }
+
+        .cube-brand-text {
+            position: absolute;
+            top: 52%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-family: 'Arial Black', sans-serif;
+            font-size: 18px;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #000;
+            pointer-events: none;
+        }
+
+        .stock-badge {
+            background-color: #dc2626;
+            color: white;
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .price-tag {
+            font-size: 36px;
+            color: #ff1493;
+            margin-bottom: 10px;
+        }
+
+        .product-details-text {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #4b5563;
+            margin-bottom: 20px;
+        }
+
+        .buy-now-action-btn {
+            background-color: #39ff14;
+            color: #0d0d0d;
+            width: 100%;
+            border: 4px solid #0d0d0d;
+            padding: 15px;
+            font-size: 22px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #0d0d0d;
+        }
+
+        /* Cart Drawer */
+        .cart-slide-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 420px;
+            height: 100%;
+            background-color: #ffffff;
+            border-left: 6px solid #0d0d0d;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-slide-panel.is-visible { transform: translateX(0); }
+
+        .cart-panel-header {
+            background-color: #ff1493;
+            padding: 20px;
+            color: #ffffff;
+            border-bottom: 4px solid #0d0d0d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-dismiss-btn { background: none; border: none; color: #ffffff; font-size: 32px; cursor: pointer; }
+
+        .cart-item-list-space { padding: 20px; flex-grow: 1; overflow-y: auto; }
+
+        .empty-cart-notice { font-family: Arial, sans-serif; font-weight: bold; color: #9ca3af; text-align: center; margin-top: 50px; }
+
+        .active-cart-row {
+            border: 3px solid #0d0d0d;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: #39ff14;
+            margin-bottom: 15px;
+        }
+
+        .quantity-controller-box { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+
+        .qty-adjust-btn {
+            background-color: #ffffff;
+            border: 2px solid #0d0d0d;
+            width: 28px;
+            height: 28px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Multi-Step Checkout Modal */
+        .checkout-step-container {
+            background-color: #f3f4f6;
+            border: 3px solid #0d0d0d;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            display: none;
+            font-family: Arial, sans-serif;
+        }
+
+        .checkout-step-container label { display: block; font-weight: bold; font-size: 12px; margin-bottom: 4px; margin-top: 8px; }
+
+        .checkout-step-container input { width: 100%; padding: 8px; border: 2px solid #0d0d0d; border-radius: 4px; font-size: 14px; }
+
+        .step-next-btn {
+            background-color: #0d0d0d;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+        }
+
+        .cart-panel-footer { padding: 25px; border-top: 4px solid #0d0d0d; background-color: #f9fafb; }
+
+        .summary-row { display: flex; justify-content: space-between; font-size: 16px; font-family: Arial, sans-serif; font-weight: bold; margin-bottom: 8px; }
+
+        .total-bold-row { display: flex; justify-content: space-between; font-size: 22px; margin-top: 10px; padding-top: 10px; border-top: 2px dashed #0d0d0d; }
+
+        .checkout-trigger-btn {
+            width: 100%;
+            background-color: #ff1493;
+            color: #ffffff;
+            border: 4px solid #0d0d0d;
+            padding: 15px;
+            font-size: 20px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #0d0d0d;
+            text-align: center;
+            display: block;
+        }
+
+        .cart-dark-bg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 998; display: none; }
+
+        .cart-dark-bg-overlay.is-visible { display: block; }
+
+        /* Chatbot Interface */
+        .chatbot-anchor-bubble {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #0d0d0d;
+            color: #39ff14;
+            border: 3px solid #ffffff;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 997;
+        }
+
+        .chatbot-window-panel {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 350px;
+            height: 480px;
+            background-color: #ffffff;
+            border: 4px solid #0d0d0d;
+            border-radius: 12px;
+            z-index: 997;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-window-panel.is-active { display: flex; }
+
+        .chatbot-top-header {
